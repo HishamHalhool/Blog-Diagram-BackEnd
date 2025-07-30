@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT;
 const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/blog-system";
+ "mongodb+srv://hishamahmedhassan99:Hals879$@hishamdb.yt63gwt.mongodb.net/Blog-System?retryWrites=true&w=majority" || "mongodb://localhost:27017/blog-system";
 
 mongoose
   .connect(MONGO_URI)
