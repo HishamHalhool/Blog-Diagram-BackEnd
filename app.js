@@ -43,7 +43,7 @@ app.get("/health", (req, res) => {
 
 const PORT = process.env.PORT;
 const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/Blog-System";
+  process.env.MONGO_URI ;
 
 // Initialize MongoDB connection with retry
 const initializeDB = async () => {
@@ -90,6 +90,10 @@ mongoose.connection.on('connecting', () => {
 
 mongoose.connection.on('reconnected', () => {
   console.log('✅ MongoDB reconnected');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 export default app;

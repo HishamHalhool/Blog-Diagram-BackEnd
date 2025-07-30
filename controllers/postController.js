@@ -11,7 +11,9 @@ export const getAllPosts = async (req, res) => {
     const posts = await Post.find();
     res.json(posts);
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    console.log(err);
+    res.status(500).json({ message: 'Server error', error: err });
+    
   }
 };
 
