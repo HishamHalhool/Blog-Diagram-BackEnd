@@ -18,6 +18,26 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Blog System API");
 });
 
+// Health check endpoint
+app.get("/health", (req, res) => {
+  const connectionStates = {
+    0: "disconnected",
+    1: "connected", 
+    2: "connecting",
+    3: "disconnecting"
+  };
+  
+  const dbStatus = connectionStates[mongoose.connection.readyState] || "unknown";
+  res.json({ 
+    status: "ok", 
+    database: dbStatus,
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    mongoUriExists: !!process.env.MONGO_URI,
+    connectionState: mongoose.connection.readyState
+  });
+});
+
 // TODO: Add routes here
 
 const PORT = process.env.PORT;
