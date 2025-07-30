@@ -1,4 +1,4 @@
-const Post = require('../models/Post');
+import Post from '../models/Post.js';
 
 // Helper to get next numeric post id
 async function getNextPostId() {
@@ -6,7 +6,7 @@ async function getNextPostId() {
   return lastPost ? lastPost.id + 1 : 1;
 }
 
-exports.getAllPosts = async (req, res) => {
+export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
     res.json(posts);
@@ -15,7 +15,7 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
-exports.getPostById = async (req, res) => {
+export const getPostById = async (req, res) => {
   try {
     const post = await Post.findOne({ id: req.params.id });
     if (!post) return res.status(404).json({ message: 'Post not found' });
@@ -25,7 +25,7 @@ exports.getPostById = async (req, res) => {
   }
 };
 
-exports.createPost = async (req, res) => {
+export const createPost = async (req, res) => {
   try {
     const { title, description, url } = req.body;
     if (!title || !description || !url) {
@@ -47,7 +47,7 @@ exports.createPost = async (req, res) => {
   }
 };
 
-exports.updatePost = async (req, res) => {
+export const updatePost = async (req, res) => {
   try {
     const post = await Post.findOne({ id: req.params.id });
     if (!post) return res.status(404).json({ message: 'Post not found' });
@@ -65,7 +65,7 @@ exports.updatePost = async (req, res) => {
   }
 };
 
-exports.deletePost = async (req, res) => {
+export const deletePost = async (req, res) => {
   try {
     const post = await Post.findOne({ id: req.params.id });
     if (!post) return res.status(404).json({ message: 'Post not found' });

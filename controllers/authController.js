@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'c5fad1617bd8e77b95ca02020230e078bc2a0952fe2c615e816995f5fe71bb56';
 
@@ -10,7 +10,7 @@ async function getNextUserId() {
   return lastUser ? lastUser.id + 1 : 1;
 }
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { email, password, name } = req.body;
     if (!email || !password || !name) {
@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
